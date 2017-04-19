@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# abort script on any command that exits with a non zero value
+set -eux -o pipefail
+
+CPUS=`grep -c ^processor /proc/cpuinfo`
+
+echo `pwd`
+
+ls -lha
+
+export PATH=/var/vcap/packages/python/bin:$PATH
+export PYTHON=/var/vcap/packages/python2/bin/python
+
+pushd rethinkdb
+  ./configure --allow-fetch --prefix=${BOSH_INSTALL_TARGET}
+  make -j${CPUS}
+  make install
+popd

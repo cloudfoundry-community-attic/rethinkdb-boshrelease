@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -eux -o pipefail
+
+JOB_NAME=rethinkdb
+RUN_DIR=/var/vcap/sys/run/${JOB_NAME}
+DATA_DIR=/var/vcap/store/${JOB_NAME}
+LOG_DIR=/var/vcap/sys/log/${JOB_NAME}
+PIDFILE=${RUN_DIR}/pid
+PACKAGE_DIR=/var/vcap/jobs/${JOB_NAME}/packages
+CONFIG_FILE=/var/vcap/jobs/${JOB_NAME}/rethinkdb.conf
+
+source /var/vcap/jobs/$JOB_NAME/bin/ctl_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE $JOB_NAME
+
+    mkdir -p $RUN_DIR
+    mkdir -p $DATA_DIR
+    mkdir -p $LOG_DIR
+
+    chown -R vcap:vcap $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    exec $PACKAGE_DIR/rethinkdb/bin/rethinkdb \
+      --config-file $CONFIG_FILE \
+      --no-update-check \
+      --initial-password <%= p('rethinkdb.initial_password') %> \
+       >> $LOG_DIR/$JOB_NAME.stdout.log \
+      2>> $LOG_DIR/$JOB_NAME.stderr.log
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+esac
+exit 0

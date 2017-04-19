@@ -1,0 +1,6 @@
+[submodule "src/python2"]
+	path = src/python2
+	url = https://github.com/python/cpython.git
+[submodule "src/rethinkdb"]
+	path = src/rethinkdb
+	url = https://github.com/rethinkdb/rethinkdb.git

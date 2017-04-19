@@ -1,0 +1,8 @@
+---
+name: rethinkdb
+
+dependencies:
+  - python2
+
+files:
+  - rethinkdb

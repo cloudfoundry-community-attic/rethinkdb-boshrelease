@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# abort script on any command that exits with a non zero value
+set -eux -o pipefail
+
+CPUS=`grep -c ^processor /proc/cpuinfo`
+
+echo `pwd`
+
+ls -lha
+
+pushd python2
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
+  make -j${CPUS}
+  make install
+popd

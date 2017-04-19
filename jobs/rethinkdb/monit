@@ -1,0 +1,5 @@
+check process rethinkdb
+  with pidfile /var/vcap/sys/run/rethinkdb/pid
+  start program "/var/vcap/jobs/rethinkdb/bin/ctl start"
+  stop program "/var/vcap/jobs/rethinkdb/bin/ctl stop"
+  group vcap
