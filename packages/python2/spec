@@ -4,4 +4,4 @@ name: python2
 dependencies: []
 
 files:
-  - python2
+  - python2/**/*

@@ -1,0 +1,58 @@
+name: rethinkdb
+director_uuid: 63ddb6a6-d6fe-40e1-b16b-2ff6b2034c79
+
+releases:
+- name: rethinkdb
+  version: latest
+
+networks:
+- name: default
+  type: manual
+  subnets:
+  - range: 10.244.0.0/24
+    gateway: 10.244.0.1
+    static:
+    - 10.244.0.2
+    - 10.244.0.3
+    - 10.244.0.4
+
+instance_groups:
+  - name: rethinkdb
+    instances: 3
+    resource_pool: default
+    persistent_disk: 1_024
+    networks:
+      - name: default
+        static_ips:
+        - 10.244.0.2
+        - 10.244.0.3
+        - 10.244.0.4
+    jobs:
+      - release: rethinkdb
+        name: rethinkdb
+        properties:
+          rethinkdb:
+            initial_password: admin
+            cluster_ips:
+            - 10.244.0.2
+            - 10.244.0.3
+            - 10.244.0.4
+
+resource_pools:
+  - name: default
+    network: default
+    cloud_properties: {}
+    stemcell:
+      name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+      version: latest
+
+compilation:
+  workers: 1
+  network: default
+  reuse_compilation_vms: true
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
