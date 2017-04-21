@@ -10,28 +10,29 @@ packages:
   - rethinkdb
 
 properties:
-  rethinkdb.cluster_ips:
+  cluster_ips:
     description: Array of ip addresses for nodes in the cluster
     example:
     - 10.244.0.2
     - 10.244.0.3
     - 10.244.0.4
     default: []
-  rethinkdb.disable_admin:
+  disable_admin:
     description: Set to true to disable web administration console
     example: false
-  rethinkdb.http_port:
+  http_port:
     description: RethinkDB web UI port
     example: 8080
     default: 8080
-  rethinkdb.driver_port:
+  driver_port:
     description: RethinkDB client driver port
     example: 28015
     default: 28015
-  rethinkdb.cluster_port:
+  cluster_port:
     description: RethinkDB intracluster traffic port
     example: 29015
     default: 29015
-  rethinkdb.initial_password:
+  initial_password:
     description: password for web UI user 'admin'
     example: secret
+    default: admin
