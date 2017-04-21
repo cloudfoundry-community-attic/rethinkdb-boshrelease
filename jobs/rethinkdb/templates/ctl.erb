@@ -27,7 +27,7 @@ case $1 in
     exec $PACKAGE_DIR/rethinkdb/bin/rethinkdb \
       --config-file $CONFIG_FILE \
       --no-update-check \
-      --initial-password <%= p('rethinkdb.initial_password') %> \
+      --initial-password <%= p('initial_password') %> \
        >> $LOG_DIR/$JOB_NAME.stdout.log \
       2>> $LOG_DIR/$JOB_NAME.stderr.log
 

@@ -2,14 +2,14 @@ directory=/var/vcap/store/rethinkdb
 pid-file=/var/vcap/sys/run/rethinkdb/pid
 log-file=/var/vcap/sys/log/rethinkdb/rethinkdb.log
 bind=all
-http-port=<%= p('rethinkdb.http_port') %>
-driver-port=<%= p('rethinkdb.driver_port') %>
-cluster-port=<%= p('rethinkdb.cluster_port') %>
+http-port=<%= p('http_port') %>
+driver-port=<%= p('driver_port') %>
+cluster-port=<%= p('cluster_port') %>
 runuser=vcap
 rungroup=vcap
-<% if_p('rethinkdb.disable_admin') do %>
+<% if_p('disable_admin') do %>
 no-http-admin
 <% end %>
-<% p('rethinkdb.cluster_ips').each do |ip| %>
-join=<%= "#{ip}:#{p('rethinkdb.cluster_port')}" %>
+<% p('cluster_ips').each do |ip| %>
+join=<%= "#{ip}:#{p('cluster_port')}" %>
 <% end %>
