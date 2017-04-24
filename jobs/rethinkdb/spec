@@ -9,14 +9,15 @@ templates:
 packages:
   - rethinkdb
 
+provides:
+  - name: cluster_ips
+    type: conn
+
+consumes:
+  - name: cluster_ips
+    type: conn
+
 properties:
-  cluster_ips:
-    description: Array of ip addresses for nodes in the cluster
-    example:
-    - 10.244.0.2
-    - 10.244.0.3
-    - 10.244.0.4
-    default: []
   disable_admin:
     description: Set to true to disable web administration console
     example: false

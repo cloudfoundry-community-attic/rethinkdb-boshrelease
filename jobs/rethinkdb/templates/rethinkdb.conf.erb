@@ -10,6 +10,6 @@ rungroup=vcap
 <% if_p('disable_admin') do %>
 no-http-admin
 <% end %>
-<% p('cluster_ips').each do |ip| %>
-join=<%= "#{ip}:#{p('cluster_port')}" %>
+<% link('cluster_ips').instances.each do |ip| %>
+join=<%= "#{ip.address}:#{p('cluster_port')}" %>
 <% end %>

@@ -30,12 +30,6 @@ instance_groups:
     jobs:
       - release: rethinkdb
         name: rethinkdb
-        properties:
-          initial_password: admin
-          cluster_ips:
-          - 10.244.0.2
-          - 10.244.0.3
-          - 10.244.0.4
 
 resource_pools:
   - name: default
