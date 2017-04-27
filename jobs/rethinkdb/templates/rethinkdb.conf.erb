@@ -2,9 +2,9 @@ directory=/var/vcap/store/rethinkdb
 pid-file=/var/vcap/sys/run/rethinkdb/pid
 log-file=/var/vcap/sys/log/rethinkdb/rethinkdb.log
 bind=all
-http-port=<%= p('http_port') %>
-driver-port=<%= p('driver_port') %>
-cluster-port=<%= p('cluster_port') %>
+http-port=<%= p('http_port').to_i %>
+driver-port=<%= p('driver_port').to_i %>
+cluster-port=<%= p('cluster_port').to_i %>
 runuser=vcap
 rungroup=vcap
 <% if_p('disable_admin') do %>
@@ -17,10 +17,10 @@ join=<%= "#{ip.address}:#{p('cluster_port')}" %>
 direct-io
 <% end %>
 io-threads=<%= p('io_threads').to_i %>
-<% if_p('cores') %>
+<% if_p('cores') do %>
 cores=<%= p('cores').to_i %>
 <% end %>
-<% if_p('cache_size') %>
+<% if_p('cache_size') do %>
 cache-size=<%= p('cache_size').to_i %>
 <% end %>
 cluster-reconnect-timeout=<%= p('cluster_reconnect_timeout').to_i %>
