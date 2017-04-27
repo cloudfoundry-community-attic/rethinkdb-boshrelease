@@ -30,6 +30,8 @@ instance_groups:
     jobs:
       - release: rethinkdb
         name: rethinkdb
+        properties:
+          disable_admin: false
 
 resource_pools:
   - name: default

@@ -20,7 +20,7 @@ consumes:
 properties:
   disable_admin:
     description: Set to true to disable web administration console
-    default: true
+    example: true
   http_port:
     description: RethinkDB web UI port
     default: 8080
@@ -35,7 +35,7 @@ properties:
     default: admin
   direct_io:
     description: Use direct IO for file system access.
-    default: false
+    example: false
   io_threads:
     description: Number of simultaneous IO operations can happen at the same time.
     default: 64
