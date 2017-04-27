@@ -20,20 +20,29 @@ consumes:
 properties:
   disable_admin:
     description: Set to true to disable web administration console
-    example: false
+    default: true
   http_port:
     description: RethinkDB web UI port
-    example: 8080
     default: 8080
   driver_port:
     description: RethinkDB client driver port
-    example: 28015
     default: 28015
   cluster_port:
     description: RethinkDB intracluster traffic port
-    example: 29015
     default: 29015
   initial_password:
     description: password for web UI user 'admin'
-    example: secret
     default: admin
+  direct_io:
+    description: Use direct IO for file system access.
+    default: false
+  io_threads:
+    description: Number of simultaneous IO operations can happen at the same time.
+    default: 64
+  cores:
+    description: Number of cores to use. (Defaults to all cores)
+  cache_size:
+    description: Size of the cache in MB. (Defaults to half of the available RAM on startup.)
+  cluster_reconnect_timeout:
+    description: the amount of time, in seconds, this server will try to reconnect to a cluster if it loses connection before giving up.
+    default: 86400
